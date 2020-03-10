@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions'
 
 import Header from './Header.js'
+import Stocks from './Stocks.js'
 const Dashboard = () => <h2>Dashboard</h2>
 const SurveyNew = () => <h2>SurveyNew</h2>
 const Landing = () => <h2>Landing</h2>
@@ -20,7 +21,8 @@ class App extends Component {
                 <div>
                     <Header />
                     <Route exact path="/" component={Landing} />
-                    <Route exact path="/surveys" component={Dashboard} />
+                    <Route exact path="/stocks" component={Stocks} />
+                    <Route exact path="/dashboard" component={Dashboard} />
                     <Route exact path="/surveys/new" component={SurveyNew} />
                 </div>
                 </BrowserRouter>
