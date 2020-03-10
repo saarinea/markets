@@ -15,6 +15,9 @@
 # dev configuration
 dev.js
 
+# debugging
+launch.json
+
 # misc
 .DS_Store
 .env.local
