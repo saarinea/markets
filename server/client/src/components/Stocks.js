@@ -4,7 +4,7 @@ class Stocks extends Component {
   state = {
     error: null,
     isLoaded: false,
-    //metadata: []
+    metadata: [],
     timeseries: []
   }
 
@@ -13,9 +13,8 @@ class Stocks extends Component {
       .then(res => res.json())
       .then((data) => {
         this.setState({
-          //metadata: data["Meta Data"],
-          //timeseries: data["Time Series (5min)"],
-          timeseries: data,
+          metadata: data["Meta Data"],
+          timeseries: data["Time Series (5min)"],
           isLoaded: true
         })
       },
@@ -29,7 +28,7 @@ class Stocks extends Component {
   }
 
   renderMetaData(){
-    var metadata = this.state.timeseries["Meta Data"]
+    var metadata = this.state.metadata
     var metaArray = []
 
     for (var i in metadata){
@@ -37,18 +36,42 @@ class Stocks extends Component {
     }
 
     return metaArray.map((item) => {
-      const { meta, info } = [item[0], item[1]]
+      var meta = item[0].substr(3)
+      var info = item[1]
+
       return (
          <tr>
-            <td>{item[0]}</td>
-            <td>{item[1]}</td>
+            <td>{meta}</td>
+            <td>{info}</td>
+         </tr>
+      )
+   })
+  }
+
+  renderTimeSeries(){
+    var timeseries = this.state.timeseries
+    var timeSeriesArray = []
+
+    for (var i in timeseries){
+      var closeprice = timeseries[i]["4. close"]
+      timeSeriesArray.push([i, closeprice])
+    }
+
+    return timeSeriesArray.map((item) => {
+      var timestamp = item[0]
+      var close = item[1]
+
+      return (
+         <tr>
+            <td>{timestamp}</td>
+            <td>{close}</td>
          </tr>
       )
    })
   }
 
   render() {
-    const { error, isLoaded, timeseries } = this.state;
+    const { error, isLoaded } = this.state;
 
     if (error) {
       return <div>Error in loading</div>
@@ -63,6 +86,11 @@ class Stocks extends Component {
           <table>
             <tbody>
               {this.renderMetaData()}
+            </tbody>
+          </table>
+          <table>
+            <tbody>
+              {this.renderTimeSeries()}
             </tbody>
           </table>
         </div>
