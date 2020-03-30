@@ -9,9 +9,11 @@ class Stocks extends Component {
   };
 
   componentDidMount() {
-    fetch(
-      "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=demo"
-    )
+    console.log("CB1")
+    fetch("/data/stocks")
+    //(
+      //"https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=demo"
+    //)
       .then(res => res.json())
       .then(
         data => {
