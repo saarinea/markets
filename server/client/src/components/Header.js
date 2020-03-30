@@ -24,18 +24,27 @@ class Header extends Component {
 
   render() {
     return (
-      <nav class="navbar navbar-default navbar-fixed-top">
-        <div id="navbar container">
-          <ul class="nav navbar-nav header">
+      <nav className="navbar navbar-expand-md sticky-top navbar-custom">
+        <div className="order-0">
+          <ul className="navbar-nav ml-auto">
             <li>
-              <Link
-                to={this.props.auth ? "/stocks" : "/"}
-                href="/"
-              >
-                Markets
+              <Link to={this.props.auth ? "/stocks" : "/"} href="/">
+                Stocks
               </Link>
             </li>
-            <li class="right">{this.renderLoginButton()}</li>
+          </ul>
+        </div>
+
+        <div className="mx-auto order-0">
+          <Link className="navbar-brand mx-auto masterheader" to="/">
+            MARKETS
+          </Link>
+        </div>
+
+        <div className="order-3">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">{this.props.auth ? "Hi " + this.props.auth.name + "!" : ""}</li>
+            <li className="nav-item">{this.renderLoginButton()}</li>
           </ul>
         </div>
       </nav>

@@ -1,3 +1,12 @@
+#TODO:
+1. API-haku AlphaVantagesta yms
+1. Bottom bar
+2. Bottom bariin github-linkki sekä copyright-teksti
+3. Välilehden kuvan vaihto muuksi
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
