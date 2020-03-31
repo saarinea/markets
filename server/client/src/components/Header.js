@@ -20,7 +20,7 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-md sticky-top navbar-custom">
+      <nav className="navbar navbar-expand-md sticky-top navbar-custom py-2">
         <div className="order-0">
           <ul className="navbar-nav ml-auto">
             <li>
