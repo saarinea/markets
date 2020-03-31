@@ -9,7 +9,6 @@ class Stocks extends Component {
   };
 
   componentDidMount() {
-    console.log("CB1");
     fetch("/data/stocks")
       .then(res => res.json())
       .then(
@@ -38,12 +37,14 @@ class Stocks extends Component {
       metaArray.push([i, metadata[i]]);
     }
 
+    i = 0;
     return metaArray.map(item => {
       var meta = item[0].substr(3);
       var info = item[1];
+      i += 1;
 
       return (
-        <tr>
+        <tr key={i}>
           <td>{meta}</td>
           <td>{info}</td>
         </tr>
@@ -60,12 +61,14 @@ class Stocks extends Component {
       timeSeriesArray.push([i, closeprice]);
     }
 
+    i = 0;
     return timeSeriesArray.map(item => {
       var timestamp = item[0];
       var close = item[1];
+      i += 1; 
 
       return (
-        <tr>
+        <tr key={i}>
           <td>{timestamp}</td>
           <td>{close}</td>
         </tr>
