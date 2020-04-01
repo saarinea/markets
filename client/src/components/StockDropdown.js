@@ -37,7 +37,7 @@ class StockDropdown extends Component {
           <a
             className="dropdown-item"
             href="#"
-            onClick={() => this.click('Facebook (FB)', 'MSFT')}
+            onClick={() => this.click('Facebook (FB)', 'FB')}
           >
             Facebook (FB)
           </a>
