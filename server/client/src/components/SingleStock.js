@@ -13,47 +13,13 @@ class SingleStock extends Component {
   }
 
   componentDidMount() {
-
-    this.props.getData("AAPL")
-
-    .then( 
+    this.props.getData('MSFT').then(() => {
       this.setState({
         metadata: this.props.data['Meta Data'],
         timeseries: this.props.data['Time Series (5min)'],
         isLoaded: true
       })
-    )
-      
-
-
-    /*
-    fetch('/data/stocks')
-      .then(res => res.json())
-      .then(
-        data => {
-          this.setState({
-            metadata: data['Meta Data'],
-            timeseries: data['Time Series (5min)'],
-            isLoaded: true
-          })
-        },
-        error => {
-          this.setState({
-            isLoaded: true,
-            error
-          })
-        }
-      )
-      .catch(console.log())
-
-
-          state = {
-      error: null,
-      isLoaded: false,
-      metadata: [],
-      timeseries: []
-
-      */
+    })
   }
 
   renderMetaData() {

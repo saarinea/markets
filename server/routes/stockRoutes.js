@@ -5,7 +5,13 @@ module.exports = app => {
   app.get('/data/stocks', async (req, res) => {
     try {
       const result = await axios.get(
-        'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=demo'
+        'https://www.alphavantage.co/query',
+        {params:{
+          function:"TIME_SERIES_INTRADAY",
+          symbol: req.query.ticker,
+          interval: "5min",
+          apikey: "demo"
+        }}
       )
       res.send(result.data)
     } catch (error) {
