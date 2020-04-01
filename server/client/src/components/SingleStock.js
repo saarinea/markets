@@ -1,14 +1,32 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { getData } from '../actions/index'
 
 class SingleStock extends Component {
-  state = {
-    error: null,
-    isLoaded: false,
-    metadata: [],
-    timeseries: []
+  constructor(props) {
+    super(props)
+    this.state = {}
+    this.state.error = null
+    this.state.isLoaded = false
+    this.state.metadata = []
+    this.state.timeseries = []
   }
 
   componentDidMount() {
+
+    this.props.getData("AAPL")
+
+    .then( 
+      this.setState({
+        metadata: this.props.data['Meta Data'],
+        timeseries: this.props.data['Time Series (5min)'],
+        isLoaded: true
+      })
+    )
+      
+
+
+    /*
     fetch('/data/stocks')
       .then(res => res.json())
       .then(
@@ -27,6 +45,15 @@ class SingleStock extends Component {
         }
       )
       .catch(console.log())
+
+
+          state = {
+      error: null,
+      isLoaded: false,
+      metadata: [],
+      timeseries: []
+
+      */
   }
 
   renderMetaData() {
@@ -100,4 +127,8 @@ class SingleStock extends Component {
   }
 }
 
-export default SingleStock;
+function mapStateToProps(state) {
+  return { data: state.stock.data }
+}
+
+export default connect(mapStateToProps, { getData })(SingleStock)
