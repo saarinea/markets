@@ -1,5 +1,6 @@
 const requireLogin = require('../middlewares/requireLogin.js')
 const axios = require('axios')
+const keys = require('../config/keys.js')
 
 module.exports = app => {
   app.get('/data/stocks', async (req, res) => {
@@ -10,7 +11,7 @@ module.exports = app => {
           function:"TIME_SERIES_INTRADAY",
           symbol: req.query.ticker,
           interval: "5min",
-          apikey: "demo"
+          apikey: keys.AlphaVantageKey
         }}
       )
       res.send(result.data)
