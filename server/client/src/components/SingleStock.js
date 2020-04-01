@@ -7,23 +7,10 @@ class SingleStock extends Component {
     super(props)
     this.state = {}
     this.state.error = null
-    this.state.isLoaded = false
-    this.state.metadata = []
-    this.state.timeseries = []
-  }
-
-  componentDidMount() {
-    this.props.getData('MSFT').then(() => {
-      this.setState({
-        metadata: this.props.data['Meta Data'],
-        timeseries: this.props.data['Time Series (5min)'],
-        isLoaded: true
-      })
-    })
   }
 
   renderMetaData() {
-    var metadata = this.state.metadata
+    var metadata = this.props.data['Meta Data']
     var metaArray = []
 
     for (var i in metadata) {
@@ -46,7 +33,7 @@ class SingleStock extends Component {
   }
 
   renderTimeSeries() {
-    var timeseries = this.state.timeseries
+    var timeseries = this.props.data['Time Series (5min)']
     var timeSeriesArray = []
 
     for (var i in timeseries) {
@@ -70,7 +57,7 @@ class SingleStock extends Component {
   }
 
   render() {
-    const { error, isLoaded } = this.state
+    const { error, isLoaded } = this.props
 
     if (error) {
       return <div>Error in loading</div>
@@ -94,7 +81,7 @@ class SingleStock extends Component {
 }
 
 function mapStateToProps(state) {
-  return { data: state.stock.data }
+  return { data: state.stock.data, isLoaded: state.stock.isLoaded }
 }
 
-export default connect(mapStateToProps, { getData })(SingleStock)
+export default connect(mapStateToProps, null)(SingleStock)

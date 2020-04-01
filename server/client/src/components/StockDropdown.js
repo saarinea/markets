@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { getData } from '../actions/index'
 
 class StockDropdown extends Component {
   state = {
@@ -9,9 +11,10 @@ class StockDropdown extends Component {
   toggleOpen = () => this.setState({ isOpen: !this.state.isOpen })
   setMenutext = text => this.setState({ menuText: text })
 
-  click = text => {
+  click = (text, ticker) => {
     this.toggleOpen()
     this.setMenutext(text)
+    this.props.updateData(ticker)
   }
 
   render() {
@@ -34,35 +37,35 @@ class StockDropdown extends Component {
           <a
             className="dropdown-item"
             href="#"
-            onClick={() => this.click('Facebook (FB)')}
+            onClick={() => this.click('Facebook (FB)', 'MSFT')}
           >
             Facebook (FB)
           </a>
           <a
             className="dropdown-item"
             href="#"
-            onClick={() => this.click('Amazon (AMZN)')}
+            onClick={() => this.click('Amazon (AMZN)', 'AMZN')}
           >
             Amazon (AMZN)
           </a>
           <a
             className="dropdown-item"
             href="#"
-            onClick={() => this.click('Apple (AAPL)')}
+            onClick={() => this.click('Apple (AAPL)', 'AAPL')}
           >
             Apple (AAPL)
           </a>
           <a
             className="dropdown-item"
             href="#"
-            onClick={() => this.click('Netflix (NFLX)')}
+            onClick={() => this.click('Netflix (NFLX)', 'NFLX')}
           >
             Netflix (NFLX)
           </a>
           <a
             className="dropdown-item"
             href="#"
-            onClick={() => this.click('Alphabet (GOOG)')}
+            onClick={() => this.click('Alphabet (GOOG)', 'GOOG')}
           >
             Alphabet (GOOG)
           </a>
@@ -72,4 +75,10 @@ class StockDropdown extends Component {
   }
 }
 
-export default StockDropdown
+function mapDispatchToProps(dispatch) {
+  return {
+    updateData: ticker => dispatch(getData(ticker))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(StockDropdown)
