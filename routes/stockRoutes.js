@@ -8,9 +8,8 @@ module.exports = app => {
       const result = await axios.get(
         'https://www.alphavantage.co/query',
         {params:{
-          function:"TIME_SERIES_INTRADAY",
+          function:"TIME_SERIES_DAILY",
           symbol: req.query.ticker,
-          interval: "5min",
           apikey: keys.AlphaVantageKey
         }}
       )

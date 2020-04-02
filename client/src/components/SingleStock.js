@@ -18,6 +18,7 @@ class SingleStock extends Component {
     }
 
     i = 0
+    
     return metaArray.map(item => {
       var meta = item[0].substr(3)
       var info = item[1]
@@ -33,24 +34,27 @@ class SingleStock extends Component {
   }
 
   renderTimeSeries() {
-    var timeseries = this.props.data['Time Series (5min)']
+    var timeseries = this.props.data['Time Series (Daily)']
     var timeSeriesArray = []
 
     for (var i in timeseries) {
       var closeprice = timeseries[i]['4. close']
-      timeSeriesArray.push([i, closeprice])
+      var volume = timeseries[i]['5. volume']
+      timeSeriesArray.push([i, closeprice, volume])
     }
 
     i = 0
     return timeSeriesArray.map(item => {
       var timestamp = item[0]
       var close = item[1]
+      var volume = item[2]
       i += 1
 
       return (
         <tr key={i}>
           <td>{timestamp}</td>
           <td>{close}</td>
+          <td>{volume}</td>
         </tr>
       )
     })
@@ -71,6 +75,13 @@ class SingleStock extends Component {
               <tbody>{this.renderMetaData()}</tbody>
             </table>
             <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Close price</th>
+                  <th>Volume</th>
+                </tr>
+              </thead>
               <tbody>{this.renderTimeSeries()}</tbody>
             </table>
           </div>
