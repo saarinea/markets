@@ -24,7 +24,7 @@ class Header extends Component {
         <div className="order-0">
           <ul className="navbar-nav ml-auto">
             <li>
-              <Link to={this.props.auth ? "/stocks" : "/"} href="/">
+              <Link to={this.props.auth ? "/stocks" : "stocks/"} href="/">
                 Stocks
               </Link>
             </li>
