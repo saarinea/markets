@@ -1,8 +1,6 @@
 # TODO:
-1. API-haku AlphaVantagesta yms
-1. Bottom bar
-2. Bottom bariin github-linkki sekä copyright-teksti
-3. Välilehden kuvan vaihto muuksi
-4. Landing-sivulle jotain infotekstiä
-5. Errorit chromen dev-konsolista pois
+1. Bottom bariin github- ja linkkarikuvat ja lnikit
+2. Välilehden kuvan vaihto muuksi
+3. Landing-sivulle jotain infotekstiä
+4. State.stock.errorin laittamiennm ts. siihen error handling
 
