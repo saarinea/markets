@@ -10,7 +10,8 @@ export default function(state = initialState, action) {
     case GET_DATA:
       return Object.assign({}, state, {
         data: action.payload,
-        isLoaded: true
+        isLoaded: true,
+        isSelected: true
       })
     default:
       return state

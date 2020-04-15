@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import '../../node_modules/react-vis/dist/style.css'
 
 import Header from "./Header.js";
 import Footer from "./Footer.js"

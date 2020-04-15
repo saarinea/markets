@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getData } from '../actions/index'
+import StockLineChart from './StockLineChart'
 
 class SingleStock extends Component {
   constructor(props) {
     super(props)
     this.state = {}
     this.state.error = null
+    this.state.isSelected = false
   }
 
   renderMetaData() {
@@ -18,8 +19,8 @@ class SingleStock extends Component {
     }
 
     i = 0
-    
-    return metaArray.map(item => {
+
+    return metaArray.map((item) => {
       var meta = item[0].substr(3)
       var info = item[1]
       i += 1
@@ -44,7 +45,7 @@ class SingleStock extends Component {
     }
 
     i = 0
-    return timeSeriesArray.map(item => {
+    return timeSeriesArray.map((item) => {
       var timestamp = item[0]
       var close = item[1]
       var volume = item[2]
@@ -61,10 +62,12 @@ class SingleStock extends Component {
   }
 
   render() {
-    const { error, isLoaded } = this.props
+    const { error, isLoaded, isSelected } = this.props
 
     if (error) {
       return <div>Error in loading</div>
+    } else if (!isSelected) {
+      return <div>Select a stock</div>
     } else if (!isLoaded) {
       return <div>Loading...</div>
     } else {
@@ -74,6 +77,7 @@ class SingleStock extends Component {
             <table>
               <tbody>{this.renderMetaData()}</tbody>
             </table>
+            <StockLineChart></StockLineChart>
             <table>
               <thead>
                 <tr>
@@ -92,7 +96,11 @@ class SingleStock extends Component {
 }
 
 function mapStateToProps(state) {
-  return { data: state.stock.data, isLoaded: state.stock.isLoaded }
+  return {
+    data: state.stock.data,
+    isLoaded: state.stock.isLoaded,
+    isSelected: state.stock.isSelected,
+  }
 }
 
 export default connect(mapStateToProps, null)(SingleStock)
