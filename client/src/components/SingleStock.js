@@ -78,18 +78,9 @@ class SingleStock extends Component {
             <table>
               <tbody>{this.renderMetaData()}</tbody>
             </table>
-            <StockLineChart2></StockLineChart2>
-            <StockLineChart></StockLineChart>
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Close price</th>
-                  <th>Volume</th>
-                </tr>
-              </thead>
-              <tbody>{this.renderTimeSeries()}</tbody>
-            </table>
+            <div className="linechart-dark">  
+            <StockLineChart2 />
+            </div>
           </div>
         </div>
       )

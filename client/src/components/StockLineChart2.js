@@ -7,13 +7,7 @@ import { format } from 'd3-format'
 import { timeFormat } from 'd3-time-format'
 
 import { ChartCanvas, Chart } from 'react-stockcharts'
-import {
-  ScatterSeries,
-  SquareMarker,
-  TriangleMarker,
-  CircleMarker,
-  LineSeries,
-} from 'react-stockcharts/lib/series'
+import { LineSeries, BarSeries } from 'react-stockcharts/lib/series'
 import { XAxis, YAxis } from 'react-stockcharts/lib/axes'
 import {
   CrossHairCursor,
@@ -46,7 +40,7 @@ class StockLineChart2 extends Component {
       var close = parseFloat(timeseries[i]['4. close'])
       var volume = parseFloat(timeseries[i]['5. volume'])
       var date = new Date(i)
-      timeSeriesArray.push({
+      timeSeriesArray.unshift({
         date: date,
         open: open,
         close: close,
@@ -74,10 +68,10 @@ class StockLineChart2 extends Component {
       <ChartCanvas
         ratio={ratio}
         width={width}
-        height={400}
+        height={600}
         margin={{ left: 70, right: 70, top: 20, bottom: 30 }}
         type={type}
-        pointsPerPxThreshold={1}
+        pointsPerPxThreshold={2}
         seriesName="AAPL"
         data={data}
         xAccessor={xAccessor}
@@ -85,7 +79,7 @@ class StockLineChart2 extends Component {
         xScale={xScale}
         xExtents={xExtents}
       >
-        <Chart id={1} yExtents={(d) => [d.close]}>
+        <Chart id={1} height ={400} yExtents={(d) => [d.close]}>
           <XAxis axisAt="bottom" orient="bottom" />
           <YAxis
             axisAt="right"
@@ -104,12 +98,17 @@ class StockLineChart2 extends Component {
             orient="right"
             displayFormat={format('.2f')}
           />
-          <LineSeries yAccessor={(d) => d.close} strokeDasharray="LongDash" />
+          <LineSeries yAccessor={(d) => d.close} />
 
           <OHLCTooltip forChart={1} origin={[-40, 0]} />
+          <CrossHairCursor />
         </Chart>
 
-        <CrossHairCursor />
+        <Chart id={2} origin={(w, h) => [0, h - 150]} height={150} yExtents={d => d.volume}>
+					<XAxis axisAt="bottom" orient="bottom"/>
+					<YAxis axisAt="left" orient="left" ticks={5} tickFormat={format(".2s")}/>
+					<BarSeries yAccessor={d => d.volume} fill={(d) => d.close > d.open ? "#6BA583" : "red"} />
+				</Chart>
       </ChartCanvas>
     )
   }
