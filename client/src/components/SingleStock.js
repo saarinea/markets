@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import StockLineChart from './StockLineChart'
+import StockLineChart2 from './StockLineChart2'
 
 class SingleStock extends Component {
   constructor(props) {
@@ -77,6 +78,7 @@ class SingleStock extends Component {
             <table>
               <tbody>{this.renderMetaData()}</tbody>
             </table>
+            <StockLineChart2></StockLineChart2>
             <StockLineChart></StockLineChart>
             <table>
               <thead>

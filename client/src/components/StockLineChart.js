@@ -15,8 +15,8 @@ class StockLineChart extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      crosshairvalues: [],
-      data: {},
+      crosshairValues: [],
+      data: {}
     }
   }
 
@@ -24,9 +24,11 @@ class StockLineChart extends Component {
     this.setState({ crosshairValues: [] })
   }
 
-  _onNearestX = (value, {index}) => {
-    this.setState({crosshairValues: DATA.map(d => d[index])});
-  };
+  _onNearestX = (value, { index }) => {
+    var y = value.y
+    var x = value.x
+    this.setState({crosshairValues: [x, y]})
+  }
 
   renderTimeSeries() {
     var timeseries = this.props.data['Time Series (Daily)']
@@ -51,13 +53,19 @@ class StockLineChart extends Component {
   ]*/
 
     return (
-      <XYPlot onMouseLeave={this._onMouseLeave} width={700} height={300} xType="time" color="black">
+      <XYPlot
+        onMouseLeave={this._onMouseLeave}
+        width={700}
+        height={300}
+        xType="time"
+        color="black"
+      >
         <HorizontalGridLines />
         <VerticalGridLines />
         <XAxis title="Date" />
         <YAxis title="Closing price" />
-        <LineSeries data={data} />
-        <Crosshair></Crosshair>
+        <LineSeries data={data} onNearestX={this._onNearestX}/>
+        <Crosshair values={this.state.crosshairValues}></Crosshair>
       </XYPlot>
     )
   }
